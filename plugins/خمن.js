@@ -7,7 +7,7 @@ let handler = async (m, { conn, usedPrefix }) => {
     conn.tekateki = conn.tekateki ? conn.tekateki : {};
     let id = m.chat;
     if (id in conn.tekateki) {
-        conn.reply(m.chat, '❐┃لم يتم الاجابة علي السؤال بعد┃❌ ❯', conn.tekateki[id][0]);
+        conn.reply(m.chat, '*⌫┇لـم يـتـم الاجـابـة عـلـي الـسـؤال بـعـد┇ 🔝 ┇➥*', conn.tekateki[id][0]);
         throw false;
     }
     let tekateki = JSON.parse(fs.readFileSync(`./src/game/miku5.json`));
@@ -18,7 +18,7 @@ let handler = async (m, { conn, usedPrefix }) => {
 ⷮ ${json.question}
 ❐↞┇الـوقـت⏳↞ ${(timeout / 1000).toFixed(2)}┇
 ❐↞┇الـجـائـزة💰↞ ${poin} نقاط┇
-『𝑁𝐸𝑍𝑈𝐾𝛩–𝐵𝛩𝑇』
+*⧠━──━⧈⇓《𝑀𝐼𝑇𝑺𝑈𝑅𝐼》⇓⧈━──━⧠*
 `.trim();
     conn.tekateki[id] = [
        await conn.reply(m.chat, caption, m),
