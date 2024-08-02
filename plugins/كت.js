@@ -11,11 +11,11 @@ handler.before = async function (m) {
         // m.reply(JSON.stringify(json, null, '\t'))
         if (m.text.toLowerCase() == json.response.toLowerCase().trim()) {
             global.db.data.users[m.sender].exp += this.tekateki[id][2]
-            m.reply(`*❐┃اجـابـة صـحـيـحـة┃✅ ❯*\n\n*❐↞┇الـجـائـزة💰↞ ${this.tekateki[id][2]} نقطة┇*`)
+            m.reply(`*⧉┇اجــــابـــــة صــــحـــيـــحـــة┇ ☑️ ┇➥*\n\n*❐↞┇الـجـائـزة💰↞ ${this.tekateki[id][2]} نقطة┇*`)
             clearTimeout(this.tekateki[id][3])
             delete this.tekateki[id]
         } else if (similarity(m.text.toLowerCase(), json.response.toLowerCase().trim()) >= threshold) m.reply(`Casi lo logras!`)
-        else m.reply('❐┃اجـابـة خـاطـئـة┃❌ ❯')
+        else m.reply('*⌫┇اجــــابـــــة خـــاطــــئــــة┇ ✖️ ┇➥*')
     }
     return !0
 }
