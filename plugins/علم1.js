@@ -6,16 +6,16 @@ let handler = async (m, { conn, command, usedPrefix }) => {
     conn.tokitoki = conn.tokitoki ? conn.tokitoki : {}
     let id = m.chat
     if (id in conn.tokitoki) {
-        conn.reply(m.chat, '❐┃لم يتم الاجابة علي السؤال بعد┃❌ ❯', conn.tokitoki[id][0])
+        conn.reply(m.chat, '*⌫┇لـم يـتـم الاجـابـة عـلـي الـسـؤال بـعـد┇ 🔝 ┇➥*', conn.tokitoki[id][0])
         throw false
     }
     let src = await (await fetch('https://raw.githubusercontent.com/ze819/game/master/src/game.js/luffy1.json')).json()
   let json = src[Math.floor(Math.random() * src.length)]
-    let caption = `*❰❖── ~『𝑁𝐸𝑍𝑈𝐾𝛩–𝐵𝛩𝑇』~──❖❱*\n *•┇❖↞استخدم انسحب للانسحاب┇🇸🇦❯*
+    let caption = `*❰❖── ~『𝑀𝐼𝑇𝑺𝑈𝑅–𝐵𝛩𝑇』~──❖❱*\n *•┇❖↞استخدم انسحب للانسحاب┇🇸🇦❯*
  *•┃❖↞الـوقـت⏳↞* *${(timeout / 1000).toFixed(2)}* *ثانية┇❯*
   
  *•┃❖↞الـجـائـزة💰↞* *${poin}* *نقطه┇❯*
-   *❰❖── ~『 𝑁𝐸𝑍𝑈𝐾𝛩–𝐵𝛩𝑇 』~──❖❱*
+   *❰❖── ~『 𝑀𝐼𝑇𝑺𝑈𝑅-𝐵𝛩𝑇 』~──❖❱*
      `.trim()
     conn.tokitoki[id] = [
         await conn.sendFile(m.chat, json.img, '', caption, m),
