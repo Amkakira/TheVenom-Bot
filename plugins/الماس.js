@@ -1,24 +1,22 @@
-
-let handler = async (m, {conn, usedPrefix}) => {
-
-    let who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
-    let user = global.db.data.users[who]
-    if (!(who in global.db.data.users)) throw `✳️ 
-المستخدم مفقود من قاعدة البيانات الخاصة بي`
+const xpperlimit = 350;
+const handler = async (m, {conn, command, args}) => {
+  let count = command.replace(/^شراء/i, '');
+  count = count ? /الكل/i.test(count) ? Math.floor(global.db.data.users[m.sender].exp / xpperlimit) : parseInt(count) : args[0] ? parseInt(args[0]) : 1;
+  count = Math.max(1, count);
+  if (global.db.data.users[m.sender].exp >= xpperlimit * count) {
+    global.db.data.users[m.sender].exp -= xpperlimit * count;
+    global.db.data.users[m.sender].limit += count;
     conn.reply(m.chat, `
-┌───⊷ *التوازن* ⊶
-▢ *📌الاسم* : _@${who.split('@')[0]}_
-▢ *عدد الماسك 💎* : _${user.diamond}_
-▢ *اكسبي* : _المجموع ${user.exp}_
-└──────────────
+┌─「 الدفع 」
+⌯ الكيمة : + ${count}💎 
+⌯ الفلوس : -${xpperlimit * count} XP
+└──────────────`, m);
+  } else conn.reply(m.chat, `[❣️]~ اسف معكش خبرة عشان تشتري ${count} ماس 💎`, m);
+};
+handler.help = ['A K I R A'];
+handler.tags = ['A K I R A'];
+handler.command = ['شراء', 'شراءالكل'];
 
-*ملحوظه :* 
-يمكنك شراء 💎 الماس باستخدام الطلبات
-❏ *${usedPrefix}buy <cantidad>*
-❏ *${usedPrefix}buyall*`, m, { mentions: [who] })
-}
-handler.help = ['balance']
-handler.tags = ['econ']
-handler.command = ['شراء-الماس', 'الماسي', 'diamond', 'الماس'] 
+handler.disabled = false;
 
-export default handler
+export default handler;
